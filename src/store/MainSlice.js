@@ -25,6 +25,18 @@ export const fetchCart = createAsyncThunk(
     }
   }
 );
+export const refreshCart = createAsyncThunk(
+  "MainSlice/refreshCart",
+  (_, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const Cart = commerce.cart.refresh();
+      return Cart;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+)
 export const addToCart = createAsyncThunk(
   "MainSlice/addToCart",
   (productId, thunkAPI) => {
@@ -68,8 +80,7 @@ export const updateCartQty = createAsyncThunk(
   (params, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
-      commerce.cart.update(params.id, params.quantity)
-      console.log(params.id, params.quantity)
+      commerce.cart.update(params.id, params.quantity);
       return commerce.cart.retrieve();
     } catch (error) {
       return rejectWithValue(error.message);
@@ -81,10 +92,18 @@ export const MainSlice = createSlice({
   initialState: {
     productsData: [],
     cartData: {},
+    Order : {},
     error: null,
     isLoading: true
   },
-
+  reducers : {
+    setOrder: (state,action) => {
+      state.Order = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload.data.error.message
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.fulfilled, (state, action) => {
@@ -100,6 +119,14 @@ export const MainSlice = createSlice({
       })
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.cartData = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchCart.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshCart.fulfilled, (state, action) => {
+        state.cartData = action.payload;
+        state.isLoading = false;
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.cartData = action.payload;
@@ -115,5 +142,5 @@ export const MainSlice = createSlice({
       });
   }
 });
-// export const {  } = MainSlice.actions;
+export const {setOrder , setError } = MainSlice.actions;
 export default MainSlice.reducer;

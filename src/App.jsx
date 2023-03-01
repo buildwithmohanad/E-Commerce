@@ -1,9 +1,10 @@
-import React, {  useEffect } from "react";
+import React, {  useEffect, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { Typography } from "@material-ui/core";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts, fetchCart } from "./store/MainSlice";
+import { fetchProducts, fetchCart, refreshCart, setOrder, setError } from "./store/MainSlice";
+import commerce from "./lib/commerce"
 import Theme from "./Theme.js";
 import Products from "./components/products/Products";
 import Navbar from "./components/products/Navbar/Navbar";
@@ -17,13 +18,25 @@ function App() {
 
 
 
+     const handleCaptureCheckout = async(checkoutTokenId, newOrder) => {
+      console.log(checkoutTokenId, newOrder)
+      try {
+        console.log(checkoutTokenId, newOrder)
+        const incomingOrder = await commerce.checkout.capture(checkoutTokenId, {...newOrder})
 
-
+        
+        Dispatch(setOrder(incomingOrder));
+        Dispatch(refreshCart());
+      }
+      catch (error){
+        Dispatch(setError(error))
+      }
+    }
   useEffect(() => {
     Dispatch(fetchProducts());
     Dispatch(fetchCart());
   }, []);
-  if (isLoading) {
+  if (isLoading ) {
     return (
       <Typography style={{ flexGrow: 1, textAlign: "center" }}>
         Loading..
@@ -44,7 +57,7 @@ function App() {
         },
         {
           path: "/checkout",
-          element: <Checkout  />
+          element: <Checkout handleCaptureCheckout={handleCaptureCheckout}  />
         }
       ]
     }
