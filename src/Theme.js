@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme  } from "@mui/material/styles";
 
 const Theme = createTheme({
  
@@ -7,4 +7,5 @@ const Theme = createTheme({
     secondary: { main: "#2f4ca8" }
   }
 });
+
 export default Theme;

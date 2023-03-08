@@ -16,7 +16,7 @@ const Cart = () => {
   const EmptyCart = () => (
     <Typography variant="subtitle1">
       You Have no items in your shopping cart,
-      <Link to="/" className={classes.link}>
+      <Link to="/E-Commerce/" className={classes.link}>
         start adding some
       </Link>
       !
@@ -50,7 +50,7 @@ const Cart = () => {
             EMPTY CART
           </Button>
           <Link
-            to="/checkout"
+            to="/E-Commerce/checkout"
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <Button

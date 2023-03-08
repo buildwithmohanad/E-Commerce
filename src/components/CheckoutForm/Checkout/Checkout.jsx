@@ -43,7 +43,8 @@ const Checkout = ({ handleCaptureCheckout }) => {
         });
         setCheckoutToken(token);
       } catch (error) {
-        navigate("/");
+        console.log(error);
+        navigate("/E-Commerce/");
       }
     };
     if (cartData.id) {
@@ -56,13 +57,12 @@ const Checkout = ({ handleCaptureCheckout }) => {
 
   const next = (data) => {
     setShippingData(data);
-    console.log("next fired");
     nextStep();
   };
   const timeout = () => {
     return setTimeout(() => {
       setIsFinished(true);
-    }, 4000);
+    }, 10000);
   };
   const Form = () =>
     activeStep == 0 ? (
@@ -92,7 +92,11 @@ const Checkout = ({ handleCaptureCheckout }) => {
             </Typography>
           </div>
           <br />
-          <Link to="/"  color="secondary" style={{textDecoration: "none"}}>
+          <Link
+            to="/E-Commerce/"
+            color="secondary"
+            style={{ textDecoration: "none" }}
+          >
             <Button variant="outlined" type="button">
               Back to Home
             </Button>
@@ -102,7 +106,6 @@ const Checkout = ({ handleCaptureCheckout }) => {
     } else if (isFinished) {
       return (
         <>
-          
           <div>
             <Typography variant="h5">Thank you for your purchase</Typography>
             <Typography variant="subtitle2">
@@ -110,10 +113,14 @@ const Checkout = ({ handleCaptureCheckout }) => {
             </Typography>
           </div>
           <br />
-          <Link to="/" style={{ textDecoration: "none"}} color="secondary">
-            <button variant="outlined" type="button">
+          <Link
+            to="/E-Commerce/"
+            style={{ textDecoration: "none" }}
+            color="secondary"
+          >
+            <Button variant="outlined" type="button">
               Back to Home
-            </button>
+            </Button>
           </Link>
         </>
       );
@@ -130,7 +137,7 @@ const Checkout = ({ handleCaptureCheckout }) => {
       <>
         <Typography variant="h5">Error: {error}</Typography>
         <br />
-        <Link to="/">
+        <Link to="/E-Commerce/" style={{ textDecoration: "none" }}>
           <Button
             variant="outlined"
             type="button"

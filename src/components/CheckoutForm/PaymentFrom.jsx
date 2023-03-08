@@ -20,10 +20,7 @@ const PaymentFrom = ({
 }) => {
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
-    console.log(stripe, elements)
     if (!stripe || !elements) return;
-
-    const cardElementVar = elements.getElement(CardElement);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -32,7 +29,6 @@ const PaymentFrom = ({
     if (error) {
       Dispatch(setError(error));
     } else {
-      console.log(shippingData)
       const orderData = {
         line_items: checkoutToken.line_items,
         customer: {
@@ -57,7 +53,7 @@ const PaymentFrom = ({
         }
       };
       handleCaptureCheckout(checkoutToken.id, orderData);
-      timeout()
+      timeout();
       nextStep();
     }
   };

@@ -75,7 +75,6 @@ const AddressForm = ({ checkoutToken, next }) => {
         );
     }, [shippingSubdivision]);
   }
-  console.log(shippingCountry, shippingSubdivision, shippingOption);
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -153,7 +152,7 @@ const AddressForm = ({ checkoutToken, next }) => {
           </Grid>
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Link to="/cart" style={{ textDecoration: "none" }}>
+            <Link to="/E-Commerce/cart" style={{ textDecoration: "none" }}>
               <Button variant="outlined" color="secondary">Back to Cart</Button>
             </Link>
             <Button type="submit" variant="contained" color="secondary">

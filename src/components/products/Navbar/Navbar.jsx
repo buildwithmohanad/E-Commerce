@@ -29,7 +29,7 @@ function Navbar( ) {
       >
         <Toolbar>
           <Typography variant="h6" className={classes.title} color="inherit">
-            <Link to="/" style={{ textDecoration: "none", color:"inherit" }}>
+            <Link to="/E-Commerce/" style={{ textDecoration: "none", color:"inherit" }}>
               <img
                 src={Logo}
                 alt="Commerce.js"
@@ -41,11 +41,11 @@ function Navbar( ) {
           </Typography>
 
           <div className={classes.grow} />
-          {location.pathname === "/" && (
+          {location.pathname === "/E-Commerce/" && (
             <div className={classes.button}>
               <IconButton
                 LinkComponent={Link}
-                to="/cart"
+                to="/E-Commerce/cart"
                 aria-label="Show cart items"
                 color="inherit"
               >
