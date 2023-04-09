@@ -1,0 +1,2 @@
+var n=/[A-Z]/g,o=/^ms-/,t={};function s(e){return"-"+e.toLowerCase()}function u(e){if(t.hasOwnProperty(e))return t[e];var r=e.replace(n,s);return t[e]=o.test(r)?"-"+r:r}var h=/[A-Z]/g,p=/^ms-/,a={};function c(e){return"-"+e.toLowerCase()}function v(e){if(a.hasOwnProperty(e))return a[e];var r=e.replace(h,c);return a[e]=p.test(r)?"-"+r:r}export{v as a,u as h};
+//# sourceMappingURL=hyphenate-style-name-251b432a.js.map

@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 import Product from "./Product/Product";
 import useStyles from './styles'
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function Products() {
   const MainSlice = useSelector((state) => state.MainSlice);

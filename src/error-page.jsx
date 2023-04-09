@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import useStyles from "./ErrorPageStyle";
 export default function ErrorPage() {
   const classes = useStyles();
-
   const error = useRouteError();
 
   return (

@@ -4,21 +4,18 @@ import {
   Toolbar,
   IconButton,
   Badge,
-  MenuItem,
-  Menu,
   Typography
 } from "@mui/material";
 import { useSelector } from "react-redux";
-
 import { ShoppingCart } from "@mui/icons-material";
-import { Link, useLocation, Outlet } from "react-router-dom";
-import Logo from "../../../assets/commerce.png";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import Logo from "../../../assets/commerce.svg";
 import useStyles from "./styles";
 function Navbar( ) {
   const classes = useStyles();
-  const Location = useLocation();
+  let location = useLocation();
   const {cartData} = useSelector(state => state.MainSlice)
-
+  let badgeContent = cartData.total_items ? cartData.total_items : null
   return (
     <>
       <AppBar
@@ -29,7 +26,7 @@ function Navbar( ) {
       >
         <Toolbar>
           <Typography variant="h6" className={classes.title} color="inherit">
-            <Link to="/E-Commerce/" style={{ textDecoration: "none", color:"inherit" }}>
+            <Link to="/E-Commerce/" className={classes.Link}>
               <img
                 src={Logo}
                 alt="Commerce.js"
@@ -49,7 +46,7 @@ function Navbar( ) {
                 aria-label="Show cart items"
                 color="inherit"
               >
-                <Badge badgeContent={cartData.total_items} color="error">
+                <Badge badgeContent={badgeContent} color="error">
                   <ShoppingCart />
                 </Badge>
               </IconButton>

@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import {
   Paper,
   Stepper,
   Step,
   StepLabel,
   Typography,
-  CircularProgress,
-  Divider,
   Button,
   CssBaseline
 } from "@material-ui/core";
@@ -14,8 +12,12 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import commerce from "../../../lib/commerce";
 import useStyles from "./styles";
-import AddressForm from "../AddressForm";
-import PaymentFrom from "../PaymentFrom";
+import Loading from "../../Loading";
+// import AddressForm from "../AddressForm";
+// import PaymentFrom from "../PaymentFrom";
+const AddressForm = lazy(() => import("../AddressForm"));
+const PaymentFrom = lazy(() => import("../PaymentFrom"));
+
 const steps = ["Shipping address", "Payment details"];
 const Checkout = ({ handleCaptureCheckout }) => {
   const classes = useStyles();
@@ -29,11 +31,7 @@ const Checkout = ({ handleCaptureCheckout }) => {
   );
 
   if (isLoading) {
-    return (
-      <Typography style={{ flexGrow: 1, textAlign: "center" }}>
-        Loading..
-      </Typography>
-    );
+    return <Loading />;
   }
   useEffect(() => {
     const generateToken = async () => {
@@ -47,7 +45,7 @@ const Checkout = ({ handleCaptureCheckout }) => {
         navigate("/E-Commerce/");
       }
     };
-    if (cartData.id) {
+    if (cartData.id && cartData.line_items.length > 0) {
       generateToken();
     }
   }, [cartData]);
@@ -84,7 +82,8 @@ const Checkout = ({ handleCaptureCheckout }) => {
         <>
           <div style={{ textDecoration: "none" }}>
             <Typography variant="h5">
-              Thank you for your purchase, {Order.customer.firstname}
+              Thank you for your purchase, {Order.customer.firstname}{" "}
+              {/* space between name*/}
               {Order.customer.lastname}
             </Typography>
             <Typography variant="subtitle2">
@@ -108,9 +107,6 @@ const Checkout = ({ handleCaptureCheckout }) => {
         <>
           <div>
             <Typography variant="h5">Thank you for your purchase</Typography>
-            <Typography variant="subtitle2">
-              Order ref: {Order.customer_reference}
-            </Typography>
           </div>
           <br />
           <Link
@@ -125,11 +121,7 @@ const Checkout = ({ handleCaptureCheckout }) => {
         </>
       );
     } else {
-      return (
-        <div className={classes.spinner}>
-          <CircularProgress />
-        </div>
-      );
+      return <Loading />;
     }
   };
   if (error) {
@@ -151,29 +143,33 @@ const Checkout = ({ handleCaptureCheckout }) => {
   }
   return (
     <>
-      <CssBaseline />
-      <div className={classes.toolbar} />
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Typography variant="h4" align="center">
-            Checkout
-          </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map((step) => {
-              return (
-                <Step key={step}>
-                  <StepLabel>{step}</StepLabel>
-                </Step>
-              );
-            })}
-          </Stepper>
-          {activeStep === steps.length ? (
-            <Confirmation />
-          ) : (
-            checkoutToken && <Form />
-          )}
-        </Paper>
-      </main>
+      <Suspense fallback={<Loading />}>
+        <CssBaseline />
+        <div className={classes.toolbar} />
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
+            <Typography variant="h4" align="center">
+              Checkout
+            </Typography>
+            <Stepper activeStep={activeStep} className={classes.stepper}>
+              {steps.map((step) => {
+                return (
+                  <Step key={step}>
+                    <StepLabel>{step}</StepLabel>
+                  </Step>
+                );
+              })}
+            </Stepper>
+            {activeStep === steps.length ? (
+              <Confirmation />
+            ) : checkoutToken ? (
+              <Form />
+            ) : (
+              <Loading />
+            )}
+          </Paper>
+        </main>
+      </Suspense>
     </>
   );
 };

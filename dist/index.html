@@ -2,47 +2,55 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/E-Commerce/vite.png" />
+    <link rel="icon" type="image/svg+xml" href="/E-Commerce/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src *;style-src 'unsafe-inline' ;
+      script-src https://js.stripe.com/v3 'self'; frame-src https://js.stripe.com;
+       connect-src https://api.chec.io/ ws://localhost:5173/E-Commerce/"
+    />
+    
+
     <title>E-Commerce</title>
-    <script type="module" crossorigin src="/E-Commerce/assets/index-a6bc1f0a.js"></script>
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@babel-db78ef1d.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-ae76b4dd.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/hoist-non-react-statics-dd442a32.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/stylis-581c9ed0.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@emotion-4f244a08.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/clsx-1229b3e0.js">
+    <script type="module" crossorigin src="/E-Commerce/assets/index-ba5fd40e.js"></script>
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-is-41a81967.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@babel-c6125dfd.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-4fcb63cb.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/hoist-non-react-statics-7b00c3a5.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/stylis-2d96297d.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@emotion-08d9bbdd.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/clsx-db8b4e51.js">
     <link rel="modulepreload" crossorigin href="/E-Commerce/assets/scheduler-04ce0582.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-dom-25eec056.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-transition-group-5ac1fa82.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/is-in-browser-9e40da8a.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-681004a6.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-rule-value-function-0cc608d6.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-global-8de4c9c4.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-nested-81c767c4.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/hyphenate-style-name-80972348.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-camel-case-92f9f32c.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-default-unit-2eda2a60.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/css-vendor-31541eb4.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-vendor-prefixer-6d2bdb82.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-props-sort-0c9fca2f.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@mui-0100d179.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/use-sync-external-store-d3d87f58.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-redux-4aaa8762.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@remix-run-e938a1c9.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-router-fec769fa.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-router-dom-b4184ded.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/immer-b106be54.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/redux-cff4cb61.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-dom-9db6541d.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-transition-group-e9d60ee9.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/is-in-browser-d5415ab8.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-104ae402.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-rule-value-function-0c28b933.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-global-48392cc5.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-nested-51029c05.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/hyphenate-style-name-251b432a.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-camel-case-18998b63.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-default-unit-8a2d7c86.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/css-vendor-c7fd2cb3.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-vendor-prefixer-1601cd00.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/jss-plugin-props-sort-46816cce.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@mui-5cb7b048.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/use-sync-external-store-ffd82d53.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-redux-adccb4ad.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@remix-run-486e32ce.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-router-8be29213.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-router-dom-d32d627a.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/immer-41fd5235.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/redux-7ed09ab3.js">
     <link rel="modulepreload" crossorigin href="/E-Commerce/assets/redux-thunk-ef899f4c.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@reduxjs-72a064e3.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@reduxjs-9ae3ddde.js">
     <link rel="modulepreload" crossorigin href="/E-Commerce/assets/axios-419cf3fb.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@chec-a063e44a.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-hook-form-b5b478f9.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@chec-2d7d1777.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-hook-form-746de390.js">
     <link rel="modulepreload" crossorigin href="/E-Commerce/assets/prop-types-4d501b15.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@stripe-cb98a468.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/react-is-804680ca.js">
-    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@material-ui-ae844f92.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@stripe-7bcf73ad.js">
+    <link rel="modulepreload" crossorigin href="/E-Commerce/assets/@material-ui-1dbf5fba.js">
   </head>
   <body>
     <div id="root"></div>

@@ -18,6 +18,9 @@ export default makeStyles((theme) => ({
     display: 'flex',
     textDecoration: 'none',
   },
+  Link : {
+    textDecoration: "none", color:"inherit", display:"flex", alignItems: "center" 
+  },
   image: {
     marginRight: '10px',
   },

@@ -9,17 +9,16 @@ import {
   IconButton
 } from "@mui/material";
 import { AddShoppingCart } from "@mui/icons-material";
-import { addToCart, fetchCart } from "../../../store/MainSlice";
+import { addToCart } from "../../../store/MainSlice";
 import useStyles from "./styles";
-function Product({ product  }) {
+function Product({ product }) {
   const classes = useStyles();
   const Dispatch = useDispatch();
   const handleAddToCart = () => {
-
     Dispatch(addToCart(product.id));
-  }
+  };
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} data-testid="product">
       <CardMedia
         className={classes.media}
         image={product.image.url}
@@ -43,8 +42,14 @@ function Product({ product  }) {
         />
 
         <CardActions disableSpacing className={classes.cardActions}>
-          <IconButton aria-label="Add to card" 
-          onClick={handleAddToCart}
+          <IconButton
+            aria-label="Add to card"
+            sx={{
+              ":hover": {
+                backgroundColor: "rgba(0, 0, 0, 0.2)"
+              }
+            }}
+            onClick={handleAddToCart}
           >
             <AddShoppingCart />
           </IconButton>

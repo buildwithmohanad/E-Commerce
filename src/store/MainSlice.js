@@ -101,6 +101,7 @@ export const MainSlice = createSlice({
       state.Order = action.payload;
     },
     setError: (state, action) => {
+      console.log(action.payload)
       state.error = action.payload.data.error.message
     }
   },
@@ -119,14 +120,12 @@ export const MainSlice = createSlice({
       })
       .addCase(fetchCart.fulfilled, (state, action) => {
         state.cartData = action.payload;
-        state.isLoading = false;
       })
-      .addCase(fetchCart.pending, (state, action) => {
-        state.isLoading = true;
-      })
+      // .addCase(fetchCart.pending, (state, action) => {
+      //   state.isLoading = true;
+      // })
       .addCase(refreshCart.fulfilled, (state, action) => {
         state.cartData = action.payload;
-        state.isLoading = false;
       })
       .addCase(addToCart.fulfilled, (state, action) => {
         state.cartData = action.payload;

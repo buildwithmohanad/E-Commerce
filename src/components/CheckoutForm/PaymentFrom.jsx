@@ -7,7 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { setError } from "../../store/MainSlice";
-import Review from "./Review";
+const Review= React.lazy(() => import("./Review"))
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const PaymentFrom = ({
@@ -21,7 +21,6 @@ const PaymentFrom = ({
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
     if (!stripe || !elements) return;
-
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement)
@@ -57,6 +56,7 @@ const PaymentFrom = ({
       nextStep();
     }
   };
+  console.log("payment")
   return (
     <>
       <Review checkoutToken={checkoutToken} />

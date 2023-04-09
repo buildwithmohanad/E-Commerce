@@ -29,8 +29,6 @@ const AddressForm = ({ checkoutToken, next }) => {
       zip: ''
     }
   })
-  
-  
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(
       checkoutTokenId
@@ -58,11 +56,11 @@ const AddressForm = ({ checkoutToken, next }) => {
     setShippingOptions(options);
     setShippingOption(options[0].id);
   };
+  
   if (checkoutToken) {
     useEffect(() => {
       fetchShippingCountries(checkoutToken.id);
     }, []);
-
     useEffect(() => {
       if (shippingCountry) fetchSubdivisions(shippingCountry);
     }, [shippingCountry]);

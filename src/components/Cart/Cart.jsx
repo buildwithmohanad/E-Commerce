@@ -1,9 +1,15 @@
 import React from "react";
-import { Container, Typography, Button, Grid } from "@mui/material";
+import {
+  Container,
+  Typography,
+  Button,
+  Grid
+  
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
-import { useTheme } from "@material-ui/core/styles";
 import Cartitem from "./Cartitem/Cartitem";
+import Loading from "../Loading"
 import { emptyCart } from "../../store/MainSlice";
 import { useDispatch, useSelector } from "react-redux";
 const Cart = () => {
@@ -15,14 +21,15 @@ const Cart = () => {
   };
   const EmptyCart = () => (
     <Typography variant="subtitle1">
-      You Have no items in your shopping cart,
+      You Have no items in your shopping cart, 
       <Link to="/E-Commerce/" className={classes.link}>
-        start adding some
+        start adding some!
       </Link>
-      !
+      
     </Typography>
   );
-  if (!cartData.line_items) return "Loading";
+  if (!cartData.line_items)
+    return  <Loading />
 
   const FilledCart = () => (
     <>
