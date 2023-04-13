@@ -18,7 +18,7 @@ function Product({ product }) {
     Dispatch(addToCart(product.id));
   };
   return (
-    <Card className={classes.root} data-testid="product">
+    <Card className={classes.root} data-testid={`product-${product.id}`}>
       <CardMedia
         className={classes.media}
         image={product.image.url}

@@ -1,21 +1,24 @@
 import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, prettyDOM } from "@testing-library/react";
 import { Provider } from "react-redux";
 import store from "../../store/index.js";
 import App from "../../App.jsx";
 
 test("loads and displays Products", async () => {
   render(
-    <React.StrictMode>
       <Provider store={store}>
         <App />
       </Provider>
-    </React.StrictMode>
   );
-  expect(true).toBeTruthy()
-  // expect(screen.getByTestId("circularLoading")).toBeInTheDocument();
-  await screen.findAllByTestId("product")
-  const Products = await screen.findAllByTestId("product");
- 
+  expect(screen.getByTestId("circularLoading")).toBeInTheDocument(); //works
+  await waitFor(
+    () => {
+      return expect(screen.findByTestId(/product/i)).toBeInTheDocument(); // fails
+    },
+    { timeout: 120000 }
+  );
+
+  const Products = await screen.findAllByTestId(/product/i);
+
   expect(Products.length).toEqual(8);
-});
+},120000);

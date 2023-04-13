@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "deploy":"gh-pages -d dist",
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage"
@@ -41,7 +42,6 @@
     "@vitejs/plugin-react": "^3.1.0",
     "jsdom": "^21.1.1",
     "vite": "^4.1.0",
-    "vite-plugin-compression": "^0.5.1",
-    "vitest": "^0.29.2"
+    "vitest": "^0.30.0"
   }
 }

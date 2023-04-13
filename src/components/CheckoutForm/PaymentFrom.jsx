@@ -56,7 +56,6 @@ const PaymentFrom = ({
       nextStep();
     }
   };
-  console.log("payment")
   return (
     <>
       <Review checkoutToken={checkoutToken} />

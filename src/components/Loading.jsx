@@ -9,8 +9,9 @@ function Loading({height="auto"}) {
       alignItems: "center",
       height
     }}
+    data-testid="circularLoading"
   >
-    <CircularProgress data-testid="circularLoading" />
+    <CircularProgress  />
   </div>
   )
 }
