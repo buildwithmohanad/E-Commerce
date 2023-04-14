@@ -1,5 +1,5 @@
 import React from 'react'
-import {CircularProgress} from "@material-ui/core"
+import {CircularProgress} from "@mui/material"
 function Loading({height="auto"}) {
   return (
     <div
@@ -9,6 +9,7 @@ function Loading({height="auto"}) {
       alignItems: "center",
       height
     }}
+    color='primary'
     data-testid="circularLoading"
   >
     <CircularProgress  />

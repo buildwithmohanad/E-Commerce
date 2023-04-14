@@ -75,7 +75,7 @@ const PaymentFrom = ({
                 >
                   <Button
                     variant="outlined"
-                    color="secondary"
+                   
                     onClick={backStep}
                   >
                     Back
@@ -84,7 +84,7 @@ const PaymentFrom = ({
                     type="submit"
                     variant="contained"
                     disabled={!stripe}
-                    color="secondary"
+                   
                   >
                     Pay {checkoutToken.subtotal.formatted_with_symbol}
                   </Button>

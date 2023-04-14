@@ -8,14 +8,9 @@ export default makeStyles((theme) => ({
   },
   emptyButton: {
     minWidth: '150px',
-
-
-    // [theme.breakpoints.down('xs')]: {
       marginBottom: '5px !important',
-    // },
-    // [theme.breakpoints.up('xs')]: {
       marginRight: '20px  !important',
-    // },
+    
   },
   checkoutButton: {
     minWidth: '150px',

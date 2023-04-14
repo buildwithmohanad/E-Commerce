@@ -44,7 +44,7 @@ const CartItem = ({ item }) => {
             -
           </Button>
           <Typography>{item.quantity}</Typography>
-          <Button size="small" type="button" color="secondary" 
+          <Button size="small" type="button" 
           onClick={() => handleupdateCartQty( item.quantity +1)}
           >
             +

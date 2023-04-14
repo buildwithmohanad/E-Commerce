@@ -151,9 +151,9 @@ const AddressForm = ({ checkoutToken, next }) => {
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Link to="/E-Commerce/cart" style={{ textDecoration: "none" }}>
-              <Button variant="outlined" color="secondary">Back to Cart</Button>
+              <Button variant="outlined" >Back to Cart</Button>
             </Link>
-            <Button type="submit" variant="contained" color="secondary">
+            <Button type="submit" variant="contained" >
               Next
             </Button>
           </div>

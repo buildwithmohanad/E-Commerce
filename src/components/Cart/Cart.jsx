@@ -52,6 +52,8 @@ const Cart = () => {
             size="large"
             type="button"
             variant="contained"
+            color="secondary"
+
             onClick={handleEmptyCart}
           >
             EMPTY CART

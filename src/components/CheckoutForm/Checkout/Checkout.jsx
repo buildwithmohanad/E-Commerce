@@ -7,14 +7,12 @@ import {
   Typography,
   Button,
   CssBaseline
-} from "@material-ui/core";
+} from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import commerce from "../../../lib/commerce";
 import useStyles from "./styles";
 import Loading from "../../Loading";
-// import AddressForm from "../AddressForm";
-// import PaymentFrom from "../PaymentFrom";
 const AddressForm = lazy(() => import("../AddressForm"));
 const PaymentFrom = lazy(() => import("../PaymentFrom"));
 
@@ -93,7 +91,7 @@ const Checkout = ({ handleCaptureCheckout }) => {
           <br />
           <Link
             to="/E-Commerce/"
-            color="secondary"
+            
             style={{ textDecoration: "none" }}
           >
             <Button variant="outlined" type="button">
@@ -112,7 +110,7 @@ const Checkout = ({ handleCaptureCheckout }) => {
           <Link
             to="/E-Commerce/"
             style={{ textDecoration: "none" }}
-            color="secondary"
+            
           >
             <Button variant="outlined" type="button">
               Back to Home
