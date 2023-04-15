@@ -1,12 +1,11 @@
 import React from "react";
 import { Container, Typography, Button, Grid, Toolbar } from "@mui/material";
 import { Link } from "react-router-dom";
-import Cartitem from "./Cartitem/Cartitem.jsx";
 import Loading from "../Loading";
 import { emptyCart } from "../../store/MainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
-
+const CartItem = React.lazy(() => import("./Cartitem/Cartitem.jsx"))
 const ButtonEmptyButton = styled(Button)(({ theme }) => ({
   minWidth: "150px",
   marginBottom: "5px !important",
@@ -51,7 +50,7 @@ const Cart = () => {
         {cartData.line_items.map((item) => {
           return (
             <Grid item xs={12} sm={6} md={4} key={item.id}>
-              <Cartitem item={item} />
+              <CartItem item={item} />
             </Grid>
           );
         })}
