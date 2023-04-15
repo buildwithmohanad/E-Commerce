@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import useStyles from "./styles";
-import Cartitem from "./Cartitem/Cartitem";
+import Cartitem from "./Cartitem/Cartitem.jsx";
 import Loading from "../Loading"
 import { emptyCart } from "../../store/MainSlice";
 import { useDispatch, useSelector } from "react-redux";
