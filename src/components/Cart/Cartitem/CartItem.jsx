@@ -57,6 +57,7 @@ const CartItem = ({ item }) => {
           <Button
             type="button"
             size="small"
+            color="secondary"
             onClick={() => handleupdateCartQty(item.quantity - 1)}
           >
             -
