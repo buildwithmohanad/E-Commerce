@@ -6,7 +6,8 @@ import {
   StepLabel,
   Typography,
   Button,
-  CssBaseline
+  CssBaseline,
+  Toolbar
 } from "@mui/material";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -175,7 +176,7 @@ const Checkout = ({ handleCaptureCheckout }) => {
     <>
     <Suspense fallback={<Loading />}>
       <CssBaseline />
-      <div />
+      <Toolbar />
       <MainLayout>
         <StyledPaper>
           <Typography variant="h4" align="center">

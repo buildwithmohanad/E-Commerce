@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Grid, Toolbar } from "@mui/material";
 import Product from "./Product/Product";
 import { useSelector } from "react-redux";
 import { styled } from '@mui/material/styles';
@@ -14,7 +14,7 @@ function Products() {
 
   return (
   <MainContent>
-    <div  />
+    <Toolbar  />
     <Grid container justifyContent="center" spacing={4}>
       {MainSlice.productsData.map((product) => (
         <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
