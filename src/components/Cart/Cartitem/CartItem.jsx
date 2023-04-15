@@ -7,55 +7,77 @@ import {
   CardContent,
   CardMedia
 } from "@mui/material";
-import {removeFromCart ,updateCartQty} from "../../../store/MainSlice"
+import { removeFromCart, updateCartQty } from "../../../store/MainSlice";
 import { useDispatch } from "react-redux";
-import useStyles from "./styles";
-const CartItem = ({ item }) => {
-  const classes = useStyles();
-  const Dispatch = useDispatch()
-  const handleRemoveFromCart = () => {
-    Dispatch(removeFromCart(item.id))
-  }
-  const handleupdateCartQty = ( Qty) => {
-    let params = {id: item.id, quantity: {quantity:Qty}}
-    Dispatch(updateCartQty(params))
+import { styled } from "@mui/material/styles";
+const CardMediaMedia = styled(CardMedia)(({ theme }) => ({
+  height: 260,
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat"
+}));
 
-  }
+const StyledCardContent = styled(CardContent)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "space-between"
+}));
+
+const CardActionsCartActions = styled(CardActions)(({ theme }) => ({
+  justifyContent: "space-between"
+}));
+
+const DivButtons = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center"
+}));
+const CartItem = ({ item }) => {
+  const Dispatch = useDispatch();
+  const handleRemoveFromCart = () => {
+    Dispatch(removeFromCart(item.id));
+  };
+  const handleupdateCartQty = (Qty) => {
+    let params = { id: item.id, quantity: { quantity: Qty } };
+    Dispatch(updateCartQty(params));
+  };
 
   return (
     <Card>
-      <CardMedia
+      <CardMediaMedia
         image={item.image.url}
         alt={item.name}
-        className={classes.media}
         sx={{ backgroundSize: "contain ", backgroundRepeat: "no-repeat" }}
       />
-      <CardContent className={classes.cardContent}>
+      <StyledCardContent>
         <Typography variant="h4">{item.name}</Typography>
         <Typography variant="h6">
           {item.line_total.formatted_with_symbol}
         </Typography>
-      </CardContent>
-      <CardActions className={classes.cartActions}>
-        <div className={classes.buttons}>
-          <Button type="button" size="small" 
-          onClick={() => handleupdateCartQty( item.quantity -1)}
+      </StyledCardContent>
+      <CardActionsCartActions>
+        <DivButtons>
+          <Button
+            type="button"
+            size="small"
+            onClick={() => handleupdateCartQty(item.quantity - 1)}
           >
             -
           </Button>
           <Typography>{item.quantity}</Typography>
-          <Button size="small" type="button" 
-          onClick={() => handleupdateCartQty( item.quantity +1)}
+          <Button
+            size="small"
+            type="button"
+            onClick={() => handleupdateCartQty(item.quantity + 1)}
           >
             +
           </Button>
-        </div>
-        <Button variant="contained" type="button" 
-        onClick={handleRemoveFromCart} 
+        </DivButtons>
+        <Button
+          variant="contained"
+          type="button"
+          onClick={handleRemoveFromCart}
         >
           Remove
         </Button>
-      </CardActions>
+      </CardActionsCartActions>
     </Card>
   );
 };

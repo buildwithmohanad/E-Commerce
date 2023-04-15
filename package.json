@@ -18,7 +18,6 @@
     "@emotion/styled": "^11.10.6",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.0",
-    "@mui/styles": "^5.12.0",
     "@mui/system": "^5.12.0",
     "@mui/x-data-grid": "^6.0.4",
     "@reduxjs/toolkit": "^1.9.2",

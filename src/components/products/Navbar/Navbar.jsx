@@ -10,52 +10,75 @@ import { useSelector } from "react-redux";
 import { ShoppingCart } from "@mui/icons-material";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import Logo from "../../../assets/commerce.svg";
-import useStyles from "./styles";
+import { styled } from '@mui/material/styles';
+
+const drawerWidth = 0;
+
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  boxShadow: "none",
+  borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+
+  [theme.breakpoints.up("sm")]: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+  },
+}));
+
+const TypographyTitle = styled(Typography)(({ theme }) => ({
+  flexGrow: 1,
+  alignItems: "center",
+  display: "flex",
+  textDecoration: "none",
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  textDecoration: "none",
+  color: "inherit",
+  display: "flex",
+  alignItems: "center",
+}));
+
+const ImgImage = styled("img")(({ theme }) => ({
+  marginRight: "10px",
+}));
+
+const DivGrow = styled("div")(({ theme }) => ({
+  flexGrow: 1,
+}));
 function Navbar( ) {
-  const classes = useStyles();
   let location = useLocation();
   const {cartData} = useSelector(state => state.MainSlice)
   let badgeContent = cartData.total_items ? cartData.total_items : null
   return (
     <>
-      <AppBar
-        position="fixed"
-        className={classes.appBar}
-        color="inherit"
-        elevation={0}
-      >
-        <Toolbar>
-          <Typography variant="h6" className={classes.title} color="inherit">
-            <Link to="/E-Commerce/" className={classes.Link}>
-              <img
-                src={Logo}
-                alt="Commerce.js"
-                height="25px"
-                className={classes.image}
-              />
-              Commerce.js
-            </Link>
-          </Typography>
-
-          <div className={classes.grow} />
-          {location.pathname === "/E-Commerce/" && (
-            <div className={classes.button}>
-              <IconButton
-                LinkComponent={Link}
-                to="/E-Commerce/cart"
-                aria-label="Show cart items"
-                color="inherit"
-              >
-                <Badge badgeContent={badgeContent} color="error">
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
-      <Outlet />
-    </>
+    <StyledAppBar position="fixed" color="inherit" elevation={0}>
+      <Toolbar>
+        <TypographyTitle variant="h6" color="inherit">
+          <StyledLink to="/E-Commerce/">
+            <ImgImage src={Logo} alt="Commerce.js" height="25px" />
+            Commerce.js
+          </StyledLink>
+        </TypographyTitle>
+  
+        <DivGrow />
+        {location.pathname === "/E-Commerce/" && (
+          <div >
+            <IconButton
+              LinkComponent={Link}
+              to="/E-Commerce/cart"
+              aria-label="Show cart items"
+              color="inherit"
+            >
+              <Badge badgeContent={badgeContent} color="error">
+                <ShoppingCart />
+              </Badge>
+            </IconButton>
+          </div>
+        )}
+      </Toolbar>
+    </StyledAppBar>
+    <Outlet />
+  </>
   );
 }
 

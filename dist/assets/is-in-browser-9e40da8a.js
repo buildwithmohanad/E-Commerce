@@ -1,2 +1,0 @@
-var e=typeof Symbol=="function"&&typeof Symbol.iterator=="symbol"?function(o){return typeof o}:function(o){return o&&typeof Symbol=="function"&&o.constructor===Symbol&&o!==Symbol.prototype?"symbol":typeof o},t=(typeof window>"u"?"undefined":e(window))==="object"&&(typeof document>"u"?"undefined":e(document))==="object"&&document.nodeType===9;export{t as i};
-//# sourceMappingURL=is-in-browser-9e40da8a.js.map

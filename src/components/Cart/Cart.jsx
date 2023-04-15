@@ -1,19 +1,35 @@
 import React from "react";
-import {
-  Container,
-  Typography,
-  Button,
-  Grid
-  
-} from "@mui/material";
+import { Container, Typography, Button, Grid, Toolbar } from "@mui/material";
 import { Link } from "react-router-dom";
-import useStyles from "./styles";
-import Cartitem from "./Cartitem/Cartitem";
-import Loading from "../Loading"
+import Cartitem from "./Cartitem/Cartitem.jsx";
+import Loading from "../Loading";
 import { emptyCart } from "../../store/MainSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { styled } from "@mui/material/styles";
+
+const ButtonEmptyButton = styled(Button)(({ theme }) => ({
+  minWidth: "150px",
+  marginBottom: "5px !important",
+  marginRight: "20px  !important"
+}));
+
+const ButtonCheckoutButton = styled(Button)(({ theme }) => ({
+  minWidth: "150px",
+  marginBottom: "5px !important",
+  backgroundColor: "#2e4ca5 !important"
+}));
+
+const DivCardDetails = styled("div")(({ theme }) => ({
+  display: "flex",
+  marginTop: "10%",
+  width: "100%",
+  justifyContent: "space-between",
+
+  [theme.breakpoints.down("sm")]: {
+    flexDirection: "column"
+  }
+}));
 const Cart = () => {
-  const classes = useStyles();
   const { cartData } = useSelector((state) => state.MainSlice);
   const Dispatch = useDispatch();
   const handleEmptyCart = () => {
@@ -21,15 +37,13 @@ const Cart = () => {
   };
   const EmptyCart = () => (
     <Typography variant="subtitle1">
-      You Have no items in your shopping cart, 
-      <Link to="/E-Commerce/" className={classes.link}>
+      You Have no items in your shopping cart,
+      <Link to="/E-Commerce/" style={{ textDecoration: "none" }}>
         start adding some!
       </Link>
-      
     </Typography>
   );
-  if (!cartData.line_items)
-    return  <Loading />
+  if (!cartData.line_items) return <Loading />;
 
   const FilledCart = () => (
     <>
@@ -42,43 +56,40 @@ const Cart = () => {
           );
         })}
       </Grid>
-      <div className={classes.cardDetails}>
+      <DivCardDetails>
         <Typography variant="h4">
           Subtotal: {cartData.subtotal.formatted_with_symbol}
         </Typography>
         <div>
-          <Button
-            className={classes.emptyButton}
+          <ButtonEmptyButton
             size="large"
             type="button"
             variant="contained"
             color="secondary"
-
             onClick={handleEmptyCart}
           >
             EMPTY CART
-          </Button>
+          </ButtonEmptyButton>
           <Link
             to="/E-Commerce/checkout"
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <Button
-              className={classes.checkoutButton}
+            <ButtonCheckoutButton
               size="large"
               type="button"
               variant="contained"
             >
               CHECKOUT
-            </Button>
+            </ButtonCheckoutButton>
           </Link>
         </div>
-      </div>
+      </DivCardDetails>
     </>
   );
   return (
     <Container>
-      <div className={classes.toolbar} />
-      <Typography className={classes.title} variant="h3" gutterBottom>
+      <Toolbar />
+      <Typography style={{ marginTop: "5%" }} variant="h3" gutterBottom>
         Your ShoppingCart
       </Typography>
       {!cartData.line_items.length ? <EmptyCart /> : <FilledCart />}

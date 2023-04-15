@@ -1,13 +1,24 @@
 import { useRouteError } from "react-router-dom";
-import { Container, Typography, Button } from "@mui/material";
+import { Typography, Button, Container } from "@mui/material";
 import { Link } from "react-router-dom";
-import useStyles from "./ErrorPageStyle";
+import { styled } from "@mui/material/styles";
+const StyledContainer = styled(Container)(({ theme }) => ({
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center",
+  mt: 10,
+
+  [theme.breakpoints.up("md")]: {
+    mt: 0,
+    height: "100vh"
+  }
+}));
 export default function ErrorPage() {
-  const classes = useStyles();
   const error = useRouteError();
 
   return (
-    <Container id="error-page" className={classes.container}>
+    <StyledContainer id="error-page">
       <Typography variant="h2" component="h1" sx={{ mb: 2 }}>
         Oops!
       </Typography>
@@ -26,6 +37,6 @@ export default function ErrorPage() {
           Back to Home
         </Button>
       </Link>
-    </Container>
+    </StyledContainer>
   );
 }

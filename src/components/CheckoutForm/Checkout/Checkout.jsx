@@ -11,14 +11,46 @@ import {
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import commerce from "../../../lib/commerce";
-import useStyles from "./styles";
 import Loading from "../../Loading";
+import { styled } from '@mui/material/styles';
 const AddressForm = lazy(() => import("../AddressForm"));
 const PaymentFrom = lazy(() => import("../PaymentFrom"));
 
 const steps = ["Shipping address", "Payment details"];
+const MainLayout = styled("main")(({ theme }) => ({
+  marginTop: "5%",
+  width: "auto",
+  marginLeft: theme.spacing(2),
+  marginRight: theme.spacing(2),
+
+  [theme.breakpoints.up(600)]: {
+    width: 600,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+}));
+
+const StyledPaper = styled(Paper)(({ theme }) => ({
+  marginTop: theme.spacing(3),
+  marginBottom: theme.spacing(3),
+  padding: theme.spacing(2),
+
+  [theme.breakpoints.down("xs")]: {
+    width: "100%",
+    marginTop: 60,
+  },
+
+  [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(6),
+    padding: theme.spacing(3),
+  },
+}));
+
+const StyledStepper = styled(Stepper)(({ theme }) => ({
+  padding: theme.spacing(3, 0, 5),
+}));
 const Checkout = ({ handleCaptureCheckout }) => {
-  const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
@@ -141,34 +173,34 @@ const Checkout = ({ handleCaptureCheckout }) => {
   }
   return (
     <>
-      <Suspense fallback={<Loading />}>
-        <CssBaseline />
-        <div className={classes.toolbar} />
-        <main className={classes.layout}>
-          <Paper className={classes.paper}>
-            <Typography variant="h4" align="center">
-              Checkout
-            </Typography>
-            <Stepper activeStep={activeStep} className={classes.stepper}>
-              {steps.map((step) => {
-                return (
-                  <Step key={step}>
-                    <StepLabel>{step}</StepLabel>
-                  </Step>
-                );
-              })}
-            </Stepper>
-            {activeStep === steps.length ? (
-              <Confirmation />
-            ) : checkoutToken ? (
-              <Form />
-            ) : (
-              <Loading />
-            )}
-          </Paper>
-        </main>
-      </Suspense>
-    </>
+    <Suspense fallback={<Loading />}>
+      <CssBaseline />
+      <div />
+      <MainLayout>
+        <StyledPaper>
+          <Typography variant="h4" align="center">
+            Checkout
+          </Typography>
+          <StyledStepper activeStep={activeStep}>
+            {steps.map((step) => {
+              return (
+                <Step key={step}>
+                  <StepLabel>{step}</StepLabel>
+                </Step>
+              );
+            })}
+          </StyledStepper>
+          {activeStep === steps.length ? (
+            <Confirmation />
+          ) : checkoutToken ? (
+            <Form />
+          ) : (
+            <Loading />
+          )}
+        </StyledPaper>
+      </MainLayout>
+    </Suspense>
+  </>
   );
 };
 
