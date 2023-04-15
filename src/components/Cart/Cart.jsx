@@ -5,7 +5,7 @@ import Loading from "../Loading";
 import { emptyCart } from "../../store/MainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
-const CartItem = React.lazy(() => import("./Cartitem/Cartitem.jsx"))
+const CartItem = React.lazy(() => import("./Cartitem/CartItem.jsx"))
 const ButtonEmptyButton = styled(Button)(({ theme }) => ({
   minWidth: "150px",
   marginBottom: "5px !important",
