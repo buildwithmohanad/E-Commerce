@@ -3,6 +3,7 @@ import { Container, Typography, Button, Grid, Toolbar } from "@mui/material";
 import { Link } from "react-router-dom";
 import Cartitem from "./Cartitem/Cartitem.jsx";
 import Loading from "../Loading";
+import useStyles from "./styles";
 import { emptyCart } from "../../store/MainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { styled } from "@mui/material/styles";
