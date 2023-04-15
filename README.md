@@ -26,7 +26,7 @@ Users should be able to:
 - Add products to the cart and checkout with **testing** card number
 ### Screenshot
 
-![](https://ux.plerdy.com/screens/2022-04-09/bc10906a48274ec55c75f889036226b0.jpeg)
+![](./src/assets/screenShot.png)
 
 ### Links
 
