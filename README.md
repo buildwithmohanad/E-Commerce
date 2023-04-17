@@ -26,7 +26,7 @@ Users should be able to:
 - Add products to the cart and checkout with **testing** card number
 ### Screenshot
 
-![](./src/assets/screenShot.png)
+![](./src/assets/screenshot.png)
 
 ### Links
 
