@@ -9,9 +9,14 @@
       content="Mohannad Al-Dardiry's E-Commerce website was built with Commercejs."
     />
     <script>
-      sessionStorage.redirect = location.href;
-  </script>
-      <meta http-equiv="refresh" content="0;URL='/E-Commerce'">
+      (function () {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
 
     <title>E-Commerce</title>
     <script type="module" crossorigin src="/E-Commerce/assets/index-18c915c8.js"></script>
