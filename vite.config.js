@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
+import pluginRewriteAll from 'vite-plugin-rewrite-all';
 
 export default defineConfig({
   base: "/E-Commerce/",
@@ -10,7 +11,8 @@ export default defineConfig({
     css: true,
     experimentalOptimizer: false
   },
-  plugins: [react()],
+  plugins: [react(), pluginRewriteAll()],
+
   define: {
     "process.env": {}
   },
