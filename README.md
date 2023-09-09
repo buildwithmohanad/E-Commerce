@@ -1,56 +1,34 @@
-# E-Commerce
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-This is an E-commerce project to help me improve my coding skills by building real projects.
+## Getting Started
 
-## Table of contents
+First, run the development server:
 
-- [Overview](#overview)
-  - [The Project](#the-Project)
-  - [Screenshot](#screenshot)
-  - [Links](#links)
-- [My process](#my-process)
-  - [Built with](#built-with)
-  - [Useful resources](#useful-resources)
-- [Author](#author)
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Overview
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-### The Project
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-Users should be able to:
+## Learn More
 
-- View the optimal layout for each of the website's pages depending on their device's screen size
-- See hover states for all interactive elements on the page
-- View each page and be able to toggle between the tabs to see new information about the products 
-- Add products to the cart and checkout with **testing** card number
-### Screenshot
+To learn more about Next.js, take a look at the following resources:
 
-![](./src/assets/screenshot.png)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Links
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-- Project URL: [Click here](https://github.com/Mohannad-AlDardiri/E-Commerce)
-- Live Site URL: [Click here](https://mohannad-aldardiri.github.io/E-Commerce)
+## Deploy on Vercel
 
-## My process
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-### Built with
-
-- Semantic HTML5 markup
-- CSS custom properties
-- Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [MUI](https://mui.com/) - For styles
-- [Commerce.js](https://commercejs.com/) - commerce engine 
-
-### Useful resources
-
-- [JavaScript Mastery](https://www.youtube.com/@javascriptmastery) - Youtube channel that inspired me on this project
-
-## Author
-
-- Linkedin - [@mohanad-aldardiry](https://www.linkedin.com/in/mohanad-aldardiry-175614239/)
-- Frontend Mentor - [@Mohannad-AlDardiri](https://www.frontendmentor.io/profile/Mohannad-AlDardiri)
-- Twitter - [@MohanadDardiry](https://www.twitter.com/MohanadDardiry)
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

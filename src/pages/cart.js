@@ -1,11 +1,15 @@
-import React from "react";
+'use client';
+import React,{useContext, useState} from "react";
 import { Container, Typography, Button, Grid, Toolbar } from "@mui/material";
-import { Link } from "react-router-dom";
-import Loading from "../Loading";
-import { emptyCart } from "../../store/MainSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
+import useSWR from "swr";
+
+import Link from "next/link";
+import { cartContext } from "../components/ContextProvider";
 import { styled } from "@mui/material/styles";
-const CartItem = React.lazy(() => import("./Cartitem/CartItem.jsx"))
+import CartItem from "../components/Cart/CartItem/CartItem"
+import Loading from "../components/Loading";
+import commerce from "../lib/commerce"
 const ButtonEmptyButton = styled(Button)(({ theme }) => ({
   minWidth: "150px",
   marginBottom: "5px !important",
@@ -28,26 +32,30 @@ const DivCardDetails = styled("div")(({ theme }) => ({
     flexDirection: "column"
   }
 }));
+
 const Cart = () => {
-  const { cartData } = useSelector((state) => state.MainSlice);
-  const Dispatch = useDispatch();
-  const handleEmptyCart = () => {
-    Dispatch(emptyCart());
+  const [spinner, setSpinner] = useState(false);
+  const { cart, setCart,cartFetcher } = useContext(cartContext);
+
+  const handleClearCart = () => {
+    setSpinner(true);
+    commerce.cart.empty().then(() => cartFetcher()).then(() => setSpinner(false))
+    .catch((err) => {
+      setSpinner(false);
+    });
   };
   const EmptyCart = () => (
     <Typography variant="subtitle1">
       You Have no items in your shopping cart,
-      <Link to="/E-Commerce/" style={{ textDecoration: "none" }}>
+      <Link href="/" style={{ textDecoration: "none" }}>
         start adding some!
       </Link>
     </Typography>
   );
-  if (!cartData.line_items) return <Loading />;
-
-  const FilledCart = () => (
+  const FilledCart = ({data}) => {console.log(data);return (
     <>
       <Grid container spacing={3}>
-        {cartData.line_items.map((item) => {
+        {data.line_items.map((item) => {
           return (
             <Grid item xs={12} sm={6} md={4} key={item.id}>
               <CartItem item={item} />
@@ -56,21 +64,25 @@ const Cart = () => {
         })}
       </Grid>
       <DivCardDetails>
-        <Typography variant="h4">
-          Subtotal: {cartData.subtotal.formatted_with_symbol}
+        <Typography variant="h4" sx={{marginBottom: 2}}>
+          Subtotal: {data.subtotal.formatted_with_symbol}
         </Typography>
         <div>
-          <ButtonEmptyButton
-            size="large"
-            type="button"
-            variant="contained"
-            color="secondary"
-            onClick={handleEmptyCart}
-          >
-            EMPTY CART
-          </ButtonEmptyButton>
+       
+              <ButtonEmptyButton
+              size="large"
+              type="button"
+              variant="contained"
+              color="secondary"
+              onClick={handleClearCart}
+            >
+               {spinner ? (
+              <CircularProgress sx={{width: "30px !important", height: "30px !important", color: "white"}}/>
+            ) : 
+              "Clear cart" }
+            </ButtonEmptyButton> 
           <Link
-            to="/E-Commerce/checkout"
+            href="/E-Commerce/checkout"
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ButtonCheckoutButton
@@ -78,22 +90,22 @@ const Cart = () => {
               type="button"
               variant="contained"
             >
-              CHECKOUT
+              Checkout
             </ButtonCheckoutButton>
           </Link>
         </div>
       </DivCardDetails>
     </>
-  );
+  )};
+  console.log(cart.line_items)
   return (
     <Container>
       <Toolbar />
       <Typography style={{ marginTop: "5%" }} variant="h3" gutterBottom>
         Your ShoppingCart
       </Typography>
-      {!cartData.line_items.length ? <EmptyCart /> : <FilledCart />}
+      { cart.line_items ? !cart.line_items.length ? <EmptyCart /> : <FilledCart data={cart} /> :  <Loading height="50vh"/>}
     </Container>
   );
 };
-
 export default Cart;
