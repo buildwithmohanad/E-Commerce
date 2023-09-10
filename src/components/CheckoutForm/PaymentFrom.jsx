@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import { Typography, Button, Divider } from "@mui/material";
 import {
   Elements,
@@ -6,8 +6,9 @@ import {
   ElementsConsumer
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { setError } from "../../store/MainSlice";
-const Review= React.lazy(() => import("./Review"))
+import commerce from "../../lib/commerce";
+import { cartContext } from "@/components/ContextProvider";
+import Review from "./Review"
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY);
 
 const PaymentFrom = ({
@@ -15,9 +16,25 @@ const PaymentFrom = ({
   checkoutToken,
   nextStep,
   backStep,
-  handleCaptureCheckout,
-  timeout
+  timeout,
+  setOrder,
+  setError
 }) => {
+  const { cartRefresher } = useContext(cartContext);
+    const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(checkoutTokenId, {
+        ...newOrder
+      });
+
+      setOrder(incomingOrder);
+      cartRefresher()
+    } catch (error) {
+      setError(error.message)
+      console.log(error)
+    }
+  };
+
   const handleSubmit = async (event, elements, stripe) => {
     event.preventDefault();
     if (!stripe || !elements) return;
@@ -26,7 +43,8 @@ const PaymentFrom = ({
       card: elements.getElement(CardElement)
     });
     if (error) {
-      Dispatch(setError(error));
+      setError(error)
+      console.log(error)
     } else {
       const orderData = {
         line_items: checkoutToken.line_items,

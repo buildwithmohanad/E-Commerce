@@ -8,8 +8,14 @@ export default function ContextProvider ({ children }) {
     if(JSON.stringify(cart) == JSON.stringify(newCart) ) {return ;}
     setCart(newCart)
   };
+  const cartRefresher = async () => {
+    let newCart = await commerce.cart.refresh();
+
+    if(JSON.stringify(cart) == JSON.stringify(newCart) ) {return ;}
+    setCart(newCart)
+  };
   return (
-    <cartContext.Provider value={{ cart, setCart, cartFetcher }}>
+    <cartContext.Provider value={{ cart, setCart, cartFetcher, cartRefresher }}>
       {children}
     </cartContext.Provider>
   );

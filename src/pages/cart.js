@@ -3,7 +3,6 @@ import React,{useContext, useState} from "react";
 import { Container, Typography, Button, Grid, Toolbar } from "@mui/material";
 import { CircularProgress } from "@mui/material";
 import useSWR from "swr";
-
 import Link from "next/link";
 import { cartContext } from "../components/ContextProvider";
 import { styled } from "@mui/material/styles";
@@ -82,7 +81,7 @@ const Cart = () => {
               "Clear cart" }
             </ButtonEmptyButton> 
           <Link
-            href="/E-Commerce/checkout"
+            href="/checkout"
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <ButtonCheckoutButton
