@@ -2,8 +2,7 @@ import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import Navbar from "..//components/Navbar/Navbar";
 import { createTheme } from "@mui/material/styles";
 import ContextProvider from "../components/ContextProvider";
-// import Head from "next/head";
-import { Html, Head } from 'next/document';
+import Head from "next/head";
 
 import favIcon from "../assets/commerce.svg"
 const Theme = createTheme({
@@ -21,7 +20,7 @@ const Theme = createTheme({
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <Html lang="en">
+    < >
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={Theme}>
           <ContextProvider>
@@ -35,6 +34,6 @@ export default function MyApp({ Component, pageProps }) {
           </ContextProvider>
         </ThemeProvider>
       </StyledEngineProvider>
-    </Html>
+    </>
   );
 }
