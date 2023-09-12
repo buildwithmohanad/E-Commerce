@@ -2,7 +2,9 @@ import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import Navbar from "..//components/Navbar/Navbar";
 import { createTheme } from "@mui/material/styles";
 import ContextProvider from "../components/ContextProvider";
-import Head from "next/head";
+// import Head from "next/head";
+import { Html, Head } from 'next/document';
+
 import favIcon from "../assets/commerce.svg"
 const Theme = createTheme({
   typography: {
@@ -19,11 +21,13 @@ const Theme = createTheme({
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <Html lang="en">
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={Theme}>
           <ContextProvider>
             <Head>
+              <title>E-commerce</title>
+              <meta name="description" content="E-commerce app built with next.js by Mohannad Aldardiry"/>
               <link rel="icon" href={favIcon.src} />
             </Head>
             <Navbar />
@@ -31,6 +35,6 @@ export default function MyApp({ Component, pageProps }) {
           </ContextProvider>
         </ThemeProvider>
       </StyledEngineProvider>
-    </>
+    </Html>
   );
 }
