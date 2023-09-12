@@ -57,8 +57,8 @@ export default function Navbar() {
             <StyledLink href="/">
               <Image
                 src={Logo}
-                alt="Commerce.js"
-                sx={{
+                alt="logo"
+                style={{
                   marginRight: "10px",
                   height: "25px",
                   width: "fit-content"
