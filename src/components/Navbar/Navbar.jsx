@@ -37,12 +37,6 @@ const StyledLink = styled(Link)(({ theme }) => ({
   alignItems: "center"
 }));
 
-const LogoImage = styled(Image)(({ theme }) => ({
-  marginRight: "10px",
-  height: "25px",
-  width: "fit-content"
-}));
-
 const DivGrow = styled("div")(({ theme }) => ({
   flexGrow: 1
 }));
@@ -50,11 +44,9 @@ const DivGrow = styled("div")(({ theme }) => ({
 export default function Navbar() {
   const { cart, setCart, cartFetcher } = React.useContext(cartContext);
 
-
-  
   let Router = useRouter();
   useSWR(cartFetcher);
- 
+
   // if data is fetched > if cart has elements > return the number
   let badgeContent = cart ? (cart.total_items ? cart.total_items : null) : null;
   return (
@@ -63,7 +55,15 @@ export default function Navbar() {
         <Toolbar>
           <TypographyTitle variant="h6" color="inherit">
             <StyledLink href="/">
-              <LogoImage src={Logo} alt="Commerce.js" />
+              <Image
+                src={Logo}
+                alt="Commerce.js"
+                sx={{
+                  marginRight: "10px",
+                  height: "25px",
+                  width: "fit-content"
+                }}
+              />
               Commerce.js
             </StyledLink>
           </TypographyTitle>
@@ -77,12 +77,7 @@ export default function Navbar() {
                 aria-label="Show cart items"
                 color="inherit"
               >
-                <Badge
-                  badgeContent={
-                   badgeContent
-                  }
-                  color="error"
-                >
+                <Badge badgeContent={badgeContent} color="error">
                   <ShoppingCart />
                 </Badge>
               </IconButton>
