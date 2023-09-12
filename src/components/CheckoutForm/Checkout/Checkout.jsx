@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from "react";
+import React, { useState, useEffect, Suspense, useContext } from "react";
 import {
   Paper,
   Stepper,
@@ -9,14 +9,14 @@ import {
   CssBaseline,
   Toolbar
 } from "@mui/material";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useRouter } from 'next/navigation'
+import Link  from "next/link";
 import commerce from "../../../lib/commerce";
 import Loading from "../../Loading";
 import { styled } from '@mui/material/styles';
-const AddressForm = lazy(() => import("../AddressForm"));
-const PaymentFrom = lazy(() => import("../PaymentFrom"));
-
+import AddressForm from "../AddressForm";
+import PaymentFrom from "../PaymentFrom"
+import { cartContext } from "@/components/ContextProvider";
 const steps = ["Shipping address", "Payment details"];
 const MainLayout = styled("main")(({ theme }) => ({
   marginTop: "5%",
@@ -51,35 +51,36 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 const StyledStepper = styled(Stepper)(({ theme }) => ({
   padding: theme.spacing(3, 0, 5),
 }));
-const Checkout = ({ handleCaptureCheckout }) => {
+
+export default function Checkout ({ handleCaptureCheckout })  {
   const [activeStep, setActiveStep] = useState(0);
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [shippingData, setShippingData] = useState({});
   const [isFinished, setIsFinished] = useState(false);
-  const navigate = useNavigate();
-  const { cartData, isLoading, error, Order } = useSelector(
-    (state) => state.MainSlice
-  );
+  const [order, setOrder] = useState({});
+  const [error, setError] = useState(false);
+  const { cart } = useContext(cartContext);
+  const router = useRouter()
 
-  if (isLoading) {
-    return <Loading />;
-  }
+
+ 
   useEffect(() => {
     const generateToken = async () => {
       try {
-        const token = await commerce.checkout.generateToken(cartData.id, {
+        const token = await commerce.checkout.generateToken(cart.id, {
           type: "cart"
         });
         setCheckoutToken(token);
       } catch (error) {
         console.log(error);
-        navigate("/E-Commerce/");
+        setError(error)
+        router.push("/");
       }
     };
-    if (cartData.id && cartData.line_items.length > 0) {
+    if (cart.id && cart.line_items.length > 0) {
       generateToken();
     }
-  }, [cartData]);
+  }, [cart]);
 
   const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -102,28 +103,29 @@ const Checkout = ({ handleCaptureCheckout }) => {
         checkoutToken={checkoutToken}
         nextStep={nextStep}
         backStep={backStep}
-        handleCaptureCheckout={handleCaptureCheckout}
+        setOrder={setOrder}
         timeout={timeout}
+        setError={setError}
       />
     );
 
   let Confirmation = () => {
-    if (Order.customer) {
+    if (order.customer) {
       return (
         <>
           <div style={{ textDecoration: "none" }}>
             <Typography variant="h5">
-              Thank you for your purchase, {Order.customer.firstname}{" "}
-              {/* space between name*/}
-              {Order.customer.lastname}
+              Thank you for your purchase, {order.customer.firstname}
+              {" "}{/* space between name*/}
+              {order.customer.lastname}
             </Typography>
             <Typography variant="subtitle2">
-              Order ref: {Order.customer_reference}
+              order ref: {order.customer_reference}
             </Typography>
           </div>
           <br />
           <Link
-            to="/E-Commerce/"
+            href="/"
             
             style={{ textDecoration: "none" }}
           >
@@ -141,7 +143,7 @@ const Checkout = ({ handleCaptureCheckout }) => {
           </div>
           <br />
           <Link
-            to="/E-Commerce/"
+            href="/"
             style={{ textDecoration: "none" }}
             
           >
@@ -156,11 +158,12 @@ const Checkout = ({ handleCaptureCheckout }) => {
     }
   };
   if (error) {
+    // eslint-disable-next-line react/display-name
     Confirmation = () => (
       <>
         <Typography variant="h5">Error: {error}</Typography>
         <br />
-        <Link to="/E-Commerce/" style={{ textDecoration: "none" }}>
+        <Link href="/" style={{ textDecoration: "none" }}>
           <Button
             variant="outlined"
             type="button"
@@ -205,4 +208,4 @@ const Checkout = ({ handleCaptureCheckout }) => {
   );
 };
 
-export default Checkout;
+ 

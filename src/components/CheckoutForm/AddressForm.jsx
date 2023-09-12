@@ -8,27 +8,28 @@ import {
   Typography
 } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import commerce from "../../lib/commerce";
 import FormInput from "./FormInput";
 const AddressForm = ({ checkoutToken, next }) => {
+  console.log("address")
   const [shippingCountries, setShippingCountries] = useState([]);
-  const [shippingCountry, setShippingCountry] = useState('');
+  const [shippingCountry, setShippingCountry] = useState("");
   const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
-  const [shippingSubdivision, setShippingSubdivision] = useState('');
+  const [shippingSubdivision, setShippingSubdivision] = useState("");
   const [shippingOptions, setShippingOptions] = useState([]);
-  const [shippingOption, setShippingOption] = useState('');
+  const [shippingOption, setShippingOption] = useState("");
 
   const methods = useForm({
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      address1: '',
-      email: '',
-      city: '',
-      zip: ''
+      firstName: "",
+      lastName: "",
+      address1: "",
+      email: "",
+      city: "",
+      zip: ""
     }
-  })
+  });
   const fetchShippingCountries = async (checkoutTokenId) => {
     const { countries } = await commerce.services.localeListShippingCountries(
       checkoutTokenId
@@ -52,27 +53,28 @@ const AddressForm = ({ checkoutToken, next }) => {
     const options = await commerce.checkout.getShippingOptions(
       checkoutTokenId,
       { country, region }
-    );
+    ).catch((err) => console.log(err));
     setShippingOptions(options);
     setShippingOption(options[0].id);
   };
-  
-  if (checkoutToken) {
-    useEffect(() => {
+
+  useEffect(() => {
+    if (checkoutToken) {
       fetchShippingCountries(checkoutToken.id);
-    }, []);
-    useEffect(() => {
-      if (shippingCountry) fetchSubdivisions(shippingCountry);
-    }, [shippingCountry]);
-    useEffect(() => {
-      if (shippingSubdivision)
-        fetchShippingOptions(
-          checkoutToken.id,
-          shippingCountry,
-          shippingSubdivision
-        );
-    }, [shippingSubdivision]);
-  }
+    }
+  }, [checkoutToken]);
+  useEffect(() => {
+    if (shippingCountry && checkoutToken) fetchSubdivisions(shippingCountry);
+  }, [shippingCountry, checkoutToken]);
+  useEffect(() => {
+    if (shippingSubdivision && checkoutToken)
+      fetchShippingOptions(
+        checkoutToken.id,
+        shippingCountry,
+        shippingSubdivision
+      );
+  }, [shippingSubdivision, checkoutToken, shippingCountry]);
+
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -80,7 +82,7 @@ const AddressForm = ({ checkoutToken, next }) => {
       </Typography>
       <FormProvider {...methods}>
         <form
-          onSubmit={ methods.handleSubmit((data) =>
+          onSubmit={methods.handleSubmit((data) =>
             next({
               ...data,
               shippingCountry,
@@ -150,10 +152,10 @@ const AddressForm = ({ checkoutToken, next }) => {
           </Grid>
           <br />
           <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <Link to="/E-Commerce/cart" style={{ textDecoration: "none" }}>
-              <Button variant="outlined" >Back to Cart</Button>
+            <Link href="/cart" style={{ textDecoration: "none" }}>
+              <Button variant="outlined">Back to Cart</Button>
             </Link>
-            <Button type="submit" variant="contained" >
+            <Button type="submit" variant="contained">
               Next
             </Button>
           </div>

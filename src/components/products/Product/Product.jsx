@@ -1,5 +1,4 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useContext, useState } from "react";
 import {
   Card,
   CardMedia,
@@ -9,70 +8,88 @@ import {
   IconButton
 } from "@mui/material";
 import { AddShoppingCart } from "@mui/icons-material";
-import { addToCart } from "../../../store/MainSlice";
-import { styled } from '@mui/material/styles';
-
+import { styled } from "@mui/material/styles";
+import commerce from "../../../lib/commerce";
+import { CircularProgress } from "@mui/material";
+import { cartContext } from "../../ContextProvider";
 const CardRoot = styled(Card)(() => ({
-  maxWidth: "100%",
+  maxWidth: "100%"
 }));
 
 const CardMediaMedia = styled(CardMedia)(() => ({
   height: 0,
-  paddingTop: "56.25%",
+  paddingTop: "56.25%"
 }));
 
 const StyledCardActions = styled(CardActions)(() => ({
   display: "flex",
-  justifyContent: "flex-end",
+  justifyContent: "flex-end"
 }));
 
 const DivCardContent = styled("div")(() => ({
   display: "flex",
-  justifyContent: "space-between",
+  justifyContent: "space-between"
 }));
 function Product({ product }) {
-  const Dispatch = useDispatch();
-  const handleAddToCart = () => {
-    Dispatch(addToCart(product.id));
+  const [spinner, setSpinner] = useState(false);
+  const { cart, setCart, cartFetcher } = useContext(cartContext);
+  const handleAddToCart = async () => {
+    setSpinner(true);
+
+    await commerce.cart
+      .add(product.id, 1).then(() => cartFetcher())
+      .then(() => {
+        setSpinner(false);
+      })
+      .catch((err) => {
+        setSpinner(false);
+      });
+      cartFetcher()
   };
-  return (<CardRoot data-testid={`product-${product.id}`}>
-  <CardMediaMedia
-    image={product.image.url}
-    title={product.name}
-    sx={{ backgroundSize: "contain", backgroundRepeat: "no-repeat" }}
-  />
-  <CardContent>
-    <DivCardContent>
-      <Typography variant="h5" gutterBottom>
-        {product.name}
-      </Typography>
-      <Typography variant="h5" gutterBottom>
-        {product.price.formatted_with_symbol}
-      </Typography>
-    </DivCardContent>
-    <Typography
-      dangerouslySetInnerHTML={{ __html: product.description }}
-      variant="body2"
-      color="textSecondary"
-      component="p"
-    />
+  return (
+    <CardRoot data-testid={`product-${product.id}`}>
+      <CardMediaMedia
+        image={product.image.url}
+        title={product.name}
+        sx={{ backgroundSize: "contain", backgroundRepeat: "no-repeat" }}
+      />
+      <CardContent>
+        <DivCardContent>
+          <Typography variant="h5" gutterBottom>
+            {product.name}
+          </Typography>
+          <Typography variant="h5" gutterBottom>
+            {product.price.formatted_with_symbol}
+          </Typography>
+        </DivCardContent>
+        <Typography
+          dangerouslySetInnerHTML={{ __html: product.description }}
+          variant="body2"
+          color="textSecondary"
+          component="div"
+        />
 
-    <StyledCardActions disableSpacing>
-      <IconButton
-        aria-label="Add to card"
-        sx={{
-          ":hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.2)",
-          },
-        }}
-        onClick={handleAddToCart}
-      >
-        <AddShoppingCart />
-      </IconButton>
-    </StyledCardActions>
-  </CardContent>
-</CardRoot>)
-
-      }
+        <StyledCardActions disableSpacing>
+          <IconButton
+            aria-label="Add to card"
+            sx={{
+              ":hover": {
+                backgroundColor: "rgba(0, 0, 0, 0.2)"
+              }
+            }}
+            onClick={handleAddToCart}
+            disabled={spinner}
+          >
+            {spinner ? (
+              <CircularProgress style={{ height: "1.8rem", width: "1.8rem" }} />
+            ) : (
+              <AddShoppingCart />
+            )}
+          </IconButton>
+        </StyledCardActions>
+      </CardContent>
+    </CardRoot>
+  );
+}
 
 export default Product;
