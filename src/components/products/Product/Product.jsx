@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useContext, useState } from "react";
 import {
   Card,
@@ -51,6 +52,7 @@ function Product({ product }) {
   return (
     <CardRoot data-testid={`product-${product.id}`}>
       <CardMedia
+  
         sx={{
           backgroundSize: "contain ",
           backgroundRepeat: "no-repeat",
@@ -58,13 +60,10 @@ function Product({ product }) {
         }}
       >
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
-          <Image
+          <img
             alt={product.name}
             src={`${product.image.url}`}
-            style={{ objectFit: "contain" }}
-            sizes="100vw"
-            fill
-            priority={true}
+            style={{ objectFit: "contain", width: "inherit", height:"-webkit-fill-available" }}
           />
         </div>
       </CardMedia>
