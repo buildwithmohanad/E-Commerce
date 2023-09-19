@@ -7,6 +7,7 @@ import {
   Typography,
   IconButton
 } from "@mui/material";
+import Image from "next/image";
 import { AddShoppingCart } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import commerce from "../../../lib/commerce";
@@ -35,24 +36,38 @@ function Product({ product }) {
   const { cart, setCart, cartFetcher } = useContext(cartContext);
   const handleAddToCart = async () => {
     setSpinner(true);
-
+    // evolutionImage = () => <Image priority/>
     await commerce.cart
-      .add(product.id, 1).then(() => cartFetcher())
+      .add(product.id, 1)
+      .then(() => cartFetcher())
       .then(() => {
         setSpinner(false);
       })
       .catch((err) => {
         setSpinner(false);
       });
-      cartFetcher()
+    cartFetcher();
   };
   return (
     <CardRoot data-testid={`product-${product.id}`}>
-      <CardMediaMedia
-        image={product.image.url}
-        title={product.name}
-        sx={{ backgroundSize: "contain", backgroundRepeat: "no-repeat" }}
-      />
+      <CardMedia
+        sx={{
+          backgroundSize: "contain ",
+          backgroundRepeat: "no-repeat",
+          height: 260
+        }}
+      >
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
+          <Image
+            alt={product.name}
+            src={`${product.image.url}`}
+            style={{ objectFit: "contain" }}
+            sizes="100vw"
+            fill
+            priority={true}
+          />
+        </div>
+      </CardMedia>
       <CardContent>
         <DivCardContent>
           <Typography variant="h5" gutterBottom>
