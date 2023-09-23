@@ -36,7 +36,6 @@ function Product({ product }) {
   const [spinner, setSpinner] = useState(false);
   const { cart, setCart, cartFetcher } = useContext(cartContext);
 
-
   const handleAddToCart = async () => {
     setSpinner(true);
     await commerce.cart
@@ -60,15 +59,14 @@ function Product({ product }) {
         }}
       >
         <div style={{ position: "relative", width: "100%", height: "100%" }}>
-            <Image
-              alt={product.name}
-              src={`${product.image.url}`}
-              style={{ objectFit: "contain" }}
-              sizes="260"
-              width={260}
-              height={260}
-              priority
-            />
+          <Image
+            alt={product.name}
+            src={`${product.image.url}`}
+            style={{ objectFit: "contain" }}
+            sizes="(max-width: 768px) 80vw, (max-width: 1200px) 45vw, 25vw"
+            fill
+            priority
+          />
         </div>
       </CardMedia>
 
