@@ -7,7 +7,7 @@ import Link from "next/link";
 import { cartContext } from "../components/ContextProvider";
 import { styled } from "@mui/material/styles";
 import CartItem from "../components/Cart/Cartitem/CartItem.jsx"
-import Loading from "../components/Loading";
+import Loading from "./Loading";
 import commerce from "../lib/commerce"
 const ButtonEmptyButton = styled(Button)(({ theme }) => ({
   minWidth: "150px",

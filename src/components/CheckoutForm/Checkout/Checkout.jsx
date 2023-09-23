@@ -12,7 +12,7 @@ import {
 import { useRouter } from 'next/navigation'
 import Link  from "next/link";
 import commerce from "../../../lib/commerce";
-import Loading from "../../Loading";
+import Loading from "../../../pages/Loading";
 import { styled } from '@mui/material/styles';
 import AddressForm from "../AddressForm";
 import PaymentFrom from "../PaymentFrom"
