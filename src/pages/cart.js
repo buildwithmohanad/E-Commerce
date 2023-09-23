@@ -2,12 +2,11 @@
 import React,{useContext, useState} from "react";
 import { Container, Typography, Button, Grid, Toolbar } from "@mui/material";
 import { CircularProgress } from "@mui/material";
-import useSWR from "swr";
 import Link from "next/link";
 import { cartContext } from "../components/ContextProvider";
 import { styled } from "@mui/material/styles";
 import CartItem from "../components/Cart/Cartitem/CartItem.jsx"
-import Loading from "./Loading";
+import Loading from "../pages/loading";
 import commerce from "../lib/commerce"
 const ButtonEmptyButton = styled(Button)(({ theme }) => ({
   minWidth: "150px",
