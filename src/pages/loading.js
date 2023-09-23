@@ -1,12 +1,15 @@
 import React from 'react'
 import {CircularProgress} from "@mui/material"
-function Loading({height="auto"}) {
+export default function Loading({height="auto"}) {
+  console.log("loading")
   return (
     <div
     style={{
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
+      marginTop: "2rem",
+      
       height
     }}
     color='primary'
@@ -17,4 +20,3 @@ function Loading({height="auto"}) {
   )
 }
 
-export default Loading

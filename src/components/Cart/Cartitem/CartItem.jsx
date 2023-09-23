@@ -1,15 +1,16 @@
-import React, {useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import {
   Typography,
   Button,
   Card,
   CardActions,
   CardContent,
-  CardMedia,CircularProgress
+  CardMedia,
+  CircularProgress
 } from "@mui/material";
 
 import Image from "next/image";
-import commerce from "../../../lib/commerce"
+import commerce from "../../../lib/commerce";
 import { styled } from "@mui/material/styles";
 import { cartContext } from "../../ContextProvider";
 const StyledCardContent = styled(CardContent)(({ theme }) => ({
@@ -33,17 +34,23 @@ const CartItem = ({ item }) => {
 
   const handleRemoveFromCart = () => {
     setRemoveSpinner(true);
-    commerce.cart.remove(item.id).then(() => cartFetcher()).then(() => setRemoveSpinner(false))
-    .catch((err) => {
-      setRemoveSpinner(false);
-    });
+    commerce.cart
+      .remove(item.id)
+      .then(() => cartFetcher())
+      .then(() => setRemoveSpinner(false))
+      .catch((err) => {
+        setRemoveSpinner(false);
+      });
   };
   const handleupdateCartQty = (Qty) => {
     setQtySpinner(true);
-    commerce.cart.update(item.id, { quantity: Qty }).then(() => cartFetcher()).then(() => setQtySpinner(false))
-    .catch((err) => {
-      setQtySpinner(false);
-    });
+    commerce.cart
+      .update(item.id, { quantity: Qty })
+      .then(() => cartFetcher())
+      .then(() => setQtySpinner(false))
+      .catch((err) => {
+        setQtySpinner(false);
+      });
   };
 
   return (
@@ -59,8 +66,10 @@ const CartItem = ({ item }) => {
           <Image
             alt={item.name}
             src={`${item.image.url}`}
-            style={{objectFit:"contain"}}
+            style={{ objectFit: "contain" }}
             fill
+            sizes="260"
+            priority
           />
         </div>
       </CardMedia>
@@ -82,10 +91,13 @@ const CartItem = ({ item }) => {
             -
           </Button>
           {qtySpinner ? (
-              <CircularProgress  sx={{width: "30px !important", height: "30px !important"}}/>
-            ) : 
-            <Typography>{item.quantity}</Typography> }
-          
+            <CircularProgress
+              sx={{ width: "30px !important", height: "30px !important" }}
+            />
+          ) : (
+            <Typography>{item.quantity}</Typography>
+          )}
+
           <Button
             size="medium"
             type="button"
@@ -101,11 +113,19 @@ const CartItem = ({ item }) => {
           onClick={handleRemoveFromCart}
           disabled={removeSpinner}
         >
-           {removeSpinner ? (
-              <CircularProgress sx={{marginRight: "10px",marginLeft: "10px", width: "25px !important", height: "25px !important", color: "black"}}/>
-            ) : 
-              "Remove" }
-         
+          {removeSpinner ? (
+            <CircularProgress
+              sx={{
+                marginRight: "10px",
+                marginLeft: "10px",
+                width: "25px !important",
+                height: "25px !important",
+                color: "black"
+              }}
+            />
+          ) : (
+            "Remove"
+          )}
         </Button>
       </CardActionsCartActions>
     </Card>

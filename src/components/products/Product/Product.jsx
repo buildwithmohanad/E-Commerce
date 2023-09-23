@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useContext, useState } from "react";
 import {
   Card,
@@ -14,6 +13,7 @@ import { styled } from "@mui/material/styles";
 import commerce from "../../../lib/commerce";
 import { CircularProgress } from "@mui/material";
 import { cartContext } from "../../ContextProvider";
+
 const CardRoot = styled(Card)(() => ({
   maxWidth: "100%"
 }));
@@ -35,6 +35,8 @@ const DivCardContent = styled("div")(() => ({
 function Product({ product }) {
   const [spinner, setSpinner] = useState(false);
   const { cart, setCart, cartFetcher } = useContext(cartContext);
+
+
   const handleAddToCart = async () => {
     setSpinner(true);
     await commerce.cart
@@ -51,14 +53,24 @@ function Product({ product }) {
   return (
     <CardRoot data-testid={`product-${product.id}`}>
       <CardMedia
-        image={product.image.url}
-        title={product.name}
         sx={{
           backgroundSize: "contain ",
           backgroundRepeat: "no-repeat",
           height: 260
         }}
-      />
+      >
+        <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <Image
+              alt={product.name}
+              src={`${product.image.url}`}
+              style={{ objectFit: "contain" }}
+              sizes="260"
+              width={260}
+              height={260}
+              priority
+            />
+        </div>
+      </CardMedia>
 
       <CardContent>
         <DivCardContent>
