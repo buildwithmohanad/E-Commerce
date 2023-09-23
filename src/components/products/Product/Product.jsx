@@ -37,7 +37,6 @@ function Product({ product }) {
   const { cart, setCart, cartFetcher } = useContext(cartContext);
   const handleAddToCart = async () => {
     setSpinner(true);
-    // evolutionImage = () => <Image priority/>
     await commerce.cart
       .add(product.id, 1)
       .then(() => cartFetcher())
@@ -52,21 +51,15 @@ function Product({ product }) {
   return (
     <CardRoot data-testid={`product-${product.id}`}>
       <CardMedia
-  
+        image={product.image.url}
+        title={product.name}
         sx={{
           backgroundSize: "contain ",
           backgroundRepeat: "no-repeat",
           height: 260
         }}
-      >
-        <div style={{ position: "relative", width: "100%", height: "100%" }}>
-          <img
-            alt={product.name}
-            src={`${product.image.url}`}
-            style={{ objectFit: "contain", width: "inherit", height:"-webkit-fill-available" }}
-          />
-        </div>
-      </CardMedia>
+      />
+
       <CardContent>
         <DivCardContent>
           <Typography variant="h5" gutterBottom>
