@@ -30,8 +30,8 @@ Users should be able to:
 
 ### Links
 
-- Project URL: [Click here](https://github.com/Mohannad-AlDardiri/E-Commerce)
-- Live Site URL: [Click here](https://mohannad-aldardiri.github.io/E-Commerce)
+- Project URL: [Click here](https://github.com/ahmed-eldardeery/E-Commerce)
+- Live Site URL: [Click here](https://ahmed-eldardeery.github.io/E-Commerce)
 
 ## My process
 
@@ -51,7 +51,4 @@ Users should be able to:
 
 ## Author
 
-- Website - [Click here](https://mohannad-aldardiri.github.io/personal-website/)
-- Linkedin - [@mohanad-aldardiry](https://www.linkedin.com/in/mohanad-aldardiry-175614239/)
-- Frontend Mentor - [@Mohannad-AlDardiri](https://www.frontendmentor.io/profile/Mohannad-AlDardiri)
-- Twitter - [@MohanadDardiry](https://www.twitter.com/MohanadDardiry)
+- Website - [Click here](https://ahmed-eldardeery.github.io/personal-website/)
