@@ -30,8 +30,8 @@ Users should be able to:
 
 ### Links
 
-- Project URL: [Click here](https://github.com/ahmed-eldardeery/E-Commerce)
-- Live Site URL: [Click here](https://ahmed-eldardeery.github.io/E-Commerce)
+- Project URL: [Click here](https://github.com/buildwithmohanad/E-Commerce)
+- Live Site URL: [Click here](https://buildwithmohanad.github.io/E-Commerce)
 
 ## My process
 
@@ -51,4 +51,4 @@ Users should be able to:
 
 ## Author
 
-- Website - [Click here](https://ahmed-eldardeery.github.io/personal-website/)
+- Website - [Click here](https://buildwithmohanad.github.io/personal-website/)
